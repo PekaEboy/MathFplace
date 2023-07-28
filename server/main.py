@@ -12,12 +12,15 @@ app.config.from_object(__name__)
 CORS(app)
 
 # sanity check route
-@app.route('/login', methods=['GET'])
-def ping_pong():
+@app.route('/api/login', methods=['GET'])
+def login():
     return jsonify({
         "login": "Account",
         "password": "12345"
         })
 
+@app.route('/api/signup', methods=['POST'])
+def signup():
+    return jsonify()
 if __name__ == '__main__':
     app.run()
