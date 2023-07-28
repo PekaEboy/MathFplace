@@ -1,8 +1,8 @@
 {
   "name": "mathfplace",
   "version": "1.0.0",
-  "description": "This is Math Forum created by PekaEboy",
-  "author": "PekaEboy",
+  "description": "This is a Math Forum created by PekaEboy",
+  "author": "PekaEboy <pekaeboy@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",

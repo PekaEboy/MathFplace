@@ -1,24 +1,23 @@
-import flask
+from flask import Flask, jsonify
+from flask_cors import CORS
 
-app = flask.Flask(__name__)
+# configuration
+DEBUG = True
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+# instantiate the app
+app = Flask(__name__)
+app.config.from_object(__name__)
 
-@app.route('/api/login', methods=['POST'])
-def api_login():
-    return flask.jsonify({
-        "login": "AlphaAccount",
-        "password": "123456"
-    })
+# enable CORS
+CORS(app)
 
-@app.route('/api/register', methods=['POST'])
-def api_register():
-      return flask.jsonify({
-           "login": "AlphaAccount",
-           "password": "123456"
-      })
+# sanity check route
+@app.route('/login', methods=['GET'])
+def ping_pong():
+    return jsonify({
+        "login": "Account",
+        "password": "12345"
+        })
 
 if __name__ == '__main__':
     app.run()

@@ -1,6 +1,6 @@
 # mathfplace
 
-> This is Math Forum created by PekaEboy
+> This is a Math Forum created by PekaEboy
 
 ## Build Setup
 
