@@ -42,13 +42,18 @@ def RefreshSQL():
 
 
 # sanity check route
-@app.route('/api/login', methods=['GET'])
+@app.route('/api/login', methods=['POST'])
 def login():
     namepass=RefreshSQL()
-    print(namepass)
-    return jsonify({
-        "loginandpassword": namepass
-        })
+    apr = json.loads(request.data.decode('utf-8'))
+    logins = [namepass[i][0] for i in range(len(namepass))]
+    if apr['login'] in logins:
+        if apr['password'] == namepass[logins.index(apr['login'])][1]:
+            return "Good"
+        else:
+            return "Bad"
+    else:
+        return "Bad"
 
 @app.route('/api/signup', methods=['POST'])
 def signup():

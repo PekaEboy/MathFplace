@@ -15,33 +15,20 @@
         name: "Login",
         methods: {
             login() {
-                
-                axios.get("http://localhost:5000/api/login")
-                .then(r => { 
-    let adjj = r.data.loginandpassword;
-    let avv = []
-    let avb = []
-    for(let i = 0; i<adjj.length; i++) {
-        avv[i]=adjj[i][0]
-        avb[i]=adjj[i][1]
-    }
-    
-    let loga=document.getElementById("login").value
-    let passw=document.getElementById("password").value
-    let pope = 0
-    for(let i = 0; i<adjj.length; i++) {
-      if (avv[i]==loga && avb[i]==passw ) {
-        alert("You have arrived!")
-        break
-      }
-      pope=pope+1
-    }
-    if (pope==adjj.length) {
-      alert("Incorrect login or password")
-    }
-                })
-                    .catch(error => { console.log(error); });
-                
+                axios.post('http://localhost:5000/api/login', {
+                                    login: document.getElementById('login').value,
+                                    password: document.getElementById('password').value
+                                })
+                                  .then(r => {
+                                        if (r.data == "Good") {
+                                            this.$router.push('/home');
+                                        } else {
+                                            alert("Unknown login or password!");
+                                        }
+                                    })
+                                  .catch(error => {
+                                        console.log(error);
+                                    });
             },
             signup() {
                 let logininput = document.getElementById("login").value
