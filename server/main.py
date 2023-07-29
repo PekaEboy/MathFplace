@@ -63,16 +63,23 @@ def signup():
             password=config.password,
             database=config.db_name    
         )
+        namepass=RefreshSQL()
         print("[INFO] PostgreSQL has succesful connected")
-
-        piq = """ INSERT INTO users VALUES (%s,%s)"""
-        rti = (jsp['login'], jsp['password'])
-        # the cursor for perfoming database operations
-        print(piq, rti)
-        with connection.cursor() as cursor:
-            cursor.execute(piq, rti)
-            print("[INFO] User has been registered")
-        connection.commit()
+        loginss = [namepass[i][0] for i in range(len(namepass))]
+        print(loginss)
+        if (jsp['login'] in loginss):
+            print("[INFO] User already exists")
+            return "Error"
+        else: 
+            piq = """ INSERT INTO users VALUES (%s,%s)"""
+            rti = (jsp['login'], jsp['password'])
+            # the cursor for perfoming database operations
+            print(piq, rti)
+            with connection.cursor() as cursor:
+                cursor.execute(piq, rti)
+                print("[INFO] User has been registered")
+            connection.commit()
+            return "User has been registered"
     except Exception as _ex:
             print("[INFO] Error while working with PostgreSQL", _ex)
     finally:

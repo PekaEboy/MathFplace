@@ -45,16 +45,6 @@
             },
             signup() {
                 let logininput = document.getElementById("login").value
-                /*axios.get("http://localhost:5000/api/login").then(r => {
-                    let adj = r.data.loginandpassword;
-                    let lgs = []
-                    for (let i = 0; i < adj.length; i++) {
-                        lgs[i] = adj[i][0]
-                    }
-                    if (lgs.includes(logininput)) {
-                        alert("Login already taken")
-                    }
-                }).catch(error => { console.log(error); });*/
                 let passwordinput = document.getElementById("password").value
                 if (logininput.length == 0 || passwordinput.length == 0 || logininput.length > 24 || passwordinput.length > 24 ) {  
                     alert("Please don't write more than 24 characters or null")
@@ -66,12 +56,15 @@
                     password: array[1]
                 })
                 .then(function (response) {
-                    console.log(response);
+                    if (response.data == "Error") {
+                        alert("User already exists")
+                    } else {
+                        alert("User created")
+                    }
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-                alert("You have successfully signed up!")
                 }
             }
         }
